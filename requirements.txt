@@ -1,0 +1,10 @@
+timm==0.5.4
+numpy
+pillow
+pandas
+scikit-learn
+matplotlib
+seaborn
+medpy
+termcolor
+tensorboardX
