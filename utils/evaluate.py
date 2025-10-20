@@ -166,8 +166,7 @@ class Evaluator_seg:
                         hausdorff = 0
                     else:
                         hausdorff = 224
-                    iou = 0
-                    # iou = jc(pred_np, gt_np)
+                    iou = jc(pred_np, gt_np)
                     sens = recall(pred_np, gt_np)
                     spec = Evaluator_seg.compute_specificity(pred_np, gt_np)
                     pixel_acc = (pred_np == gt_np).sum() / gt_np.size
@@ -178,8 +177,6 @@ class Evaluator_seg:
                     sensitivity_list.append(sens)
                     specificity_list.append(spec)
                     pixel_acc_list.append(pixel_acc)
-                    # except Exception as e:
-                    #     logger.warning(f"Metric computation failed for a sample: {e}")
 
         metrics = {
             'Dice': np.mean(dice_list),
