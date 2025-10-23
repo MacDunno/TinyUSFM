@@ -166,7 +166,7 @@ class Evaluator_seg:
                         hausdorff = 0
                     else:
                         hausdorff = 224
-                    iou = jc(pred_np, gt_np)
+                    iou = Evaluator_seg.compute_jaccard(pred_np, gt_np)
                     sens = recall(pred_np, gt_np)
                     spec = Evaluator_seg.compute_specificity(pred_np, gt_np)
                     pixel_acc = (pred_np == gt_np).sum() / gt_np.size
@@ -230,11 +230,9 @@ class Evaluator_seg:
                             specificity = np.nan
                             hd = np.nan
                         else:
-                            intersection = np.logical_and(pred_class, gt_class).sum()
-                            union = np.logical_or(pred_class, gt_class).sum()
-                            dice = 2 * intersection / (pred_class.sum() + gt_class.sum() + 1e-8)
-                            iou = intersection / (union + 1e-8)
-                            tp = intersection
+                            tp = np.logical_and(pred_class, gt_class).sum()
+                            dice = 2 * tp / (pred_class.sum() + gt_class.sum() + 1e-8)
+                            iou = Evaluator_seg.compute_jaccard(pred_class, gt_class)
                             fn = np.logical_and(~pred_class, gt_class).sum()
                             if (tp + fn) > 0:
                                 sensitivity = tp / (tp + fn + 1e-8)
@@ -280,6 +278,14 @@ class Evaluator_seg:
         tn = np.logical_and(pred == 0, gt == 0).sum()
         fp = np.logical_and(pred == 1, gt == 0).sum()
         return tn / (tn + fp + 1e-8)
+    
+    @staticmethod
+    def compute_jaccard(pred, gt):
+        intersection = np.logical_and(pred, gt).sum()
+        union = np.logical_or(pred, gt).sum()
+        if union == 0:
+            return 1.0 if intersection == 0 else 0.0
+        return intersection / union
 
     @staticmethod
     def print_metrics(metrics: Dict[str, float], phase: str = 'Validation') -> None:

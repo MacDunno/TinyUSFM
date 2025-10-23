@@ -83,12 +83,12 @@ pip install -r requirements.txt
 
 ### 🩺 Downstream Classification
 ```bash
-python train_cls.py --lr 1e-4 --model_name TinyUSFM --num_epochs 400 --num_classes 2 --pretrained True --layerwise --ls_name TinyUSFM
+python train_cls.py
 ```
 
 ### 🧩 Downstream Segmentation
 ```bash
- python train_seg.py --lr 1e-4 --model_name TinyUSFM_Seg --num_epochs 1000 --num_classes 2 --pretrained True --layerwise --task_type tumor --ls_name TinyUSFM
+ python train_seg.py
 ```
 
 ---
@@ -97,3 +97,33 @@ python train_cls.py --lr 1e-4 --model_name TinyUSFM --num_epochs 400 --num_class
 This project is licensed under the **Apache 2.0 License**.  
 See [LICENSE](LICENSE) for details.
 
+---
+
+## 📚 Citation
+
+If you find this work useful for your research, please cite:
+
+```bibtex
+@misc{ma2025tinyusfmcompactefficientultrasound,
+      title={TinyUSFM: Towards Compact and Efficient Ultrasound Foundation Models}, 
+      author={Chen Ma and Jing Jiao and Shuyu Liang and Junhu Fu and Qin Wang and Zeju Li and Yuanyuan Wang and Yi Guo},
+      year={2025},
+      eprint={2510.19239},
+      archivePrefix={arXiv},
+      primaryClass={eess.IV},
+      url={https://arxiv.org/abs/2510.19239}, 
+}
+
+@inproceedings{ma2025unlabeled,
+  title={Unlabeled Data-Driven Fetal Landmark Detection in Intrapartum Ultrasound},
+  author={Ma, Chen and Yunshu, Li and Guo, Bowen and Jiao, Jing and FDU, Huang Yi and Wang, Yuanyuan and Guo, Yi},
+  booktitle={MICCAI 2025 IUGC Challenge}
+}
+```
+
+
+---
+
+## 📬 Contact
+For any questions, please feel free to contact:
+cma24@m.fudan.edu.cn

@@ -44,3 +44,35 @@ def build_scheduler(optimizer, args):
         end_lr=1e-6, 
         power=1.0   
     )
+
+def get_lr_decay_param_groups(model, base_lr, weight_decay, num_layers=12, layer_decay=0.8):
+    def get_layer_id(param_name):
+        if param_name.startswith("backbone"):
+            if "blocks." in param_name:
+                block_id = int(param_name.split("blocks.")[1].split(".")[0])
+                return block_id
+            elif "patch_embed" in param_name:
+                return 0
+            else:
+                return num_layers - 1
+        else:
+            return num_layers 
+
+    param_groups = {}
+    for name, param in model.named_parameters():
+        if not param.requires_grad:
+            continue
+        layer_id = get_layer_id(name)
+        group_name = f"layer_{layer_id}"
+
+        if group_name not in param_groups:
+            scale = layer_decay ** (num_layers - layer_id)
+            param_groups[group_name] = {
+                "params": [],
+                "lr": base_lr * scale,
+                "weight_decay": weight_decay
+            }
+
+        param_groups[group_name]["params"].append(param)
+
+    return list(param_groups.values())

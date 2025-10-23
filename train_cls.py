@@ -3,56 +3,24 @@ import torch.nn as nn
 import torch.optim as optim  
 import os  
 import random  
-import numpy as np   
-from utils.evaluate import Evaluator  
-from utils.data_processing import DataProcessor  
+import numpy as np  
 import argparse  
 from tensorboardX import SummaryWriter  
 from datetime import datetime 
+
+from utils.evaluate import Evaluator  
+from utils.data_processing import DataProcessor  
 from utils.logger import setup_logger 
 from utils.load_model import load_model
-from utils.schedule_seg import build_scheduler 
-
-
-def get_layerwise_lr_decay_param_groups(model, base_lr, weight_decay, num_layers=12, layer_decay=0.8):
-    def get_layer_id(param_name):
-        if param_name.startswith("backbone"):
-            if "blocks." in param_name:
-                block_id = int(param_name.split("blocks.")[1].split(".")[0])
-                return block_id
-            elif "patch_embed" in param_name:
-                return 0
-            else:
-                return num_layers - 1
-        else:
-            return num_layers 
-
-    param_groups = {}
-    for name, param in model.named_parameters():
-        if not param.requires_grad:
-            continue
-        layer_id = get_layer_id(name)
-        group_name = f"layer_{layer_id}"
-
-        if group_name not in param_groups:
-            scale = layer_decay ** (num_layers - layer_id)
-            param_groups[group_name] = {
-                "params": [],
-                "lr": base_lr * scale,
-                "weight_decay": weight_decay
-            }
-
-        param_groups[group_name]["params"].append(param)
-
-    return list(param_groups.values())
+from utils.schedule import build_scheduler, get_lr_decay_param_groups 
 
 
 def parse_args():  
     parser = argparse.ArgumentParser(description='hyperparameters')  
     parser.add_argument('--model_name', type=str, default='TinyUSFM', help='name of the model')  
-    parser.add_argument('--lr', type=float, default=0.001, help='learning rate')
+    parser.add_argument('--lr', type=float, default=0.0001, help='learning rate')
     parser.add_argument('--batch_size', type=int, default=8, help='batch size')
-    parser.add_argument('--num_epochs', type=int, default=100, help='number of epochs')
+    parser.add_argument('--num_epochs', type=int, default=400, help='number of epochs')
     parser.add_argument('--num_workers', type=int, default=8, help='number of workers')
     parser.add_argument('--num_classes', type=int, default=2, help='number of classes')
     parser.add_argument('--pretrained', type=str, default='True', help='pretrained')
@@ -61,10 +29,7 @@ def parse_args():
     parser.add_argument('--wd', type=float, default=0, help='weight decay')
     parser.add_argument('--optim', type=str, default='AdamW', help='optimizer')
     parser.add_argument('--checkpoint', type=str, default='./checkpoints/TinyUSFM.pth', help='tiny usfm checkpoint')
-    parser.add_argument('--lr_decay', type=str, default='cosine', help='learning rate decay')
-    parser.add_argument('--layerwise', action='store_true', help='Use layer-wise learning rate decay')
     parser.add_argument('--warmup_epochs', type=int, default=5, help='warmup epochs')
-    parser.add_argument('--ls_name', type=str, required=True, help='experiment name for logging')
     args = parser.parse_args()  
     return args  
 
@@ -82,7 +47,7 @@ def train_model(args):
     pretrained = args.pretrained == 'True'
 
     dataset_name = os.path.basename(args.data_dir.rstrip('/')) 
-    base_logs_dir = f"./logs/cls/{args.ls_name}/{dataset_name}/{args.model_name}_{'pretrained' if pretrained else 'scratch'}"  
+    base_logs_dir = f"./logs/cls/{dataset_name}/{args.model_name}_{'pretrained' if pretrained else 'scratch'}"  
     current_time = datetime.now().strftime("%Y%m%d_%H%M%S")  
     current_logs_dir = os.path.join(base_logs_dir, current_time)  
     os.makedirs(current_logs_dir, exist_ok=True)  
@@ -110,17 +75,14 @@ def train_model(args):
     elif args.optim == 'Sgd':
         optimizer = optim.SGD(model.parameters(), lr=args.lr, weight_decay=args.wd, momentum=0.9)
     elif args.optim == 'AdamW':
-        if args.layerwise:
-            param_groups = get_layerwise_lr_decay_param_groups(
-                model=model,
-                base_lr=args.lr,
-                weight_decay=args.wd,
-                num_layers=12, 
-                layer_decay=0.8
-            )
-            optimizer = optim.AdamW(param_groups, betas=(0.9, 0.999))
-        else:
-            optimizer = optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.wd)
+        param_groups = get_lr_decay_param_groups(
+            model=model,
+            base_lr=args.lr,
+            weight_decay=args.wd,
+            num_layers=12, 
+            layer_decay=0.8
+        )
+        optimizer = optim.AdamW(param_groups, betas=(0.9, 0.999))
     else:
         raise ValueError('Optimizer not supported')
     
