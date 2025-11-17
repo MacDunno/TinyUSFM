@@ -5,6 +5,8 @@
 
 This repository provides the **official PyTorch implementation** of **TinyUSFM — the first lightweight ultrasound foundation model** designed for efficient and deployable medical AI.
 
+It serves as the official lightweight continuation of our last work [Ultrasound Foundation Model(USFM)](https://github.com/openmedlab/USFM), preserving its generalization ability while enabling efficient deployment across diverse ultrasound applications.
+
 TinyUSFM achieves foundation-level representation capability with only **5.5M parameters** and **2.16 GFLOPs**, retaining the organ versatility and task adaptability of the large-scale **Ultrasound Foundation Model (USFM)** through **feature–gradient driven coreset selection** and **domain-separated masked image modeling assisted consistency-driven distillation**.
 
 > 🏆 *TinyUSFM achieved **1st Place** in the MICCAI 2025 Intrapartum Ultrasound Grand Challenge (IUGC).*  
@@ -83,12 +85,12 @@ pip install -r requirements.txt
 
 ### 🩺 Downstream Classification
 ```bash
-python train_cls.py
+python train_cls.py --model_name TinyUSFM # or USFM
 ```
 
 ### 🧩 Downstream Segmentation
 ```bash
- python train_seg.py
+ python train_seg.py --model_name TinyUSFM_Seg # or USFM
 ```
 
 ---
@@ -112,6 +114,16 @@ If you find this work useful for your research, please cite:
       archivePrefix={arXiv},
       primaryClass={eess.IV},
       url={https://arxiv.org/abs/2510.19239}, 
+}
+
+@article{jiao2024usfm,
+  title={Usfm: A universal ultrasound foundation model generalized to tasks and organs towards label efficient image analysis},
+  author={Jiao, Jing and Zhou, Jin and Li, Xiaokang and Xia, Menghua and Huang, Yi and Huang, Lihong and Wang, Na and Zhang, Xiaofan and Zhou, Shichong and Wang, Yuanyuan and others},
+  journal={Medical image analysis},
+  volume={96},
+  pages={103202},
+  year={2024},
+  publisher={Elsevier}
 }
 
 @inproceedings{ma2025unlabeled,
