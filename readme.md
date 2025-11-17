@@ -5,14 +5,12 @@
 
 This repository provides the **official PyTorch implementation** of **TinyUSFM — the first lightweight ultrasound foundation model** designed for efficient and deployable medical AI.
 
-It serves as the official lightweight continuation of our last work [Ultrasound Foundation Model(USFM)](https://github.com/openmedlab/USFM), preserving its generalization ability while enabling efficient deployment across diverse ultrasound applications.
-
-TinyUSFM achieves foundation-level representation capability with only **5.5M parameters** and **2.16 GFLOPs**, retaining the organ versatility and task adaptability of the large-scale **Ultrasound Foundation Model (USFM)** through **feature–gradient driven coreset selection** and **domain-separated masked image modeling assisted consistency-driven distillation**.
+TinyUSFM achieves foundation-level representation capability with only **5.5M parameters** and **2.16 GFLOPs**, serves as the **official lightweight continuation** of our last work [Ultrasound Foundation Model(USFM)](https://github.com/openmedlab/USFM), preserving its generalization ability while enabling efficient deployment across diverse ultrasound applications.
 
 > 🏆 *TinyUSFM achieved **1st Place** in the MICCAI 2025 Intrapartum Ultrasound Grand Challenge (IUGC).*  
-> 🧩 *We also release **UniUS-Bench**, the largest public ultrasound benchmark covering 15 organs.*
-
-
+> 🧩 *We release **UniUS-Bench**, the largest public ultrasound benchmark covering 15 organs.*  
+> ⚙️ *This repository also **fixes and improves** the segmentation settings of [USFM](https://github.com/openmedlab/USFM).*
+> 
 ---
 
 ## 🧩 Overview
@@ -90,7 +88,7 @@ python train_cls.py --model_name TinyUSFM # or USFM
 
 ### 🧩 Downstream Segmentation
 ```bash
- python train_seg.py --model_name TinyUSFM_Seg # or USFM
+ python train_seg.py --model_name TinyUSFM_Seg # or USFM_Seg
 ```
 
 ---
