@@ -124,10 +124,13 @@ If you find this work useful for your research, please cite:
   publisher={Elsevier}
 }
 
-@inproceedings{ma2025unlabeled,
+@incollection{ma2025unlabeled,
   title={Unlabeled Data-Driven Fetal Landmark Detection in Intrapartum Ultrasound},
-  author={Ma, Chen and Yunshu, Li and Guo, Bowen and Jiao, Jing and FDU, Huang Yi and Wang, Yuanyuan and Guo, Yi},
-  booktitle={MICCAI 2025 IUGC Challenge}
+  author={Ma, Chen and Li, Yunshu and Guo, Bowen and Jiao, Jing and Huang, Yi and Wang, Yuanyuan and Guo, Yi},
+  booktitle={Intrapartum Ultrasound Grand Challenge},
+  pages={14--23},
+  year={2025},
+  publisher={Springer}
 }
 ```
 

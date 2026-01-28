@@ -84,7 +84,7 @@ class UltrasoundSegmentationDataset(Dataset):
             label = TF.rotate(label, angle)
         
         if random.random() > 0.5:
-            g = np.random.randint(10, 25) / 10.0
+            g = np.random.randint(5, 20) / 10.0
             image_np = np.array(image)
             image_np = (np.power(image_np / 255, 1.0 / g)) * 255
             image_np = image_np.astype(np.uint8)
@@ -101,7 +101,7 @@ class UltrasoundSegmentationDataset(Dataset):
             label = TF.crop(label, i, j, crop_h, crop_w)
 
         if random.random() > 0.5:
-            contr_tf = T.ColorJitter(contrast=(0.8, 2.0))
+            contr_tf = T.ColorJitter(contrast=(0.5, 2.0))
             image = contr_tf(image)
 
         return image, label
