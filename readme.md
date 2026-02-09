@@ -78,7 +78,7 @@ pip install -r requirements.txt
 ## 🚀 Usage
 
 ### 🔗 Installing Model Weight
- #### Pretrained **TinyUSFM** weights: [Google Drive](https://drive.google.com/file/d/15R3hnH0ILO39rE1gs-UgJonRqbaYTSRB/view?usp=sharing)
+ #### Pretrained **TinyUSFM** weights: [Google Drive](https://drive.google.com/file/d/1P_wDuU-StALLJEBaymioaYu52CScW-l-/view?usp=drive_link)
  #### Pretrained **USFM** weights: [Google Drive](https://drive.google.com/file/d/1KRwXZgYterH895Z8EpXpR1L1eSMMJo4q/view)
 
 ### 🩺 Downstream Classification
