@@ -3,7 +3,7 @@
 [![Framework](https://img.shields.io/badge/Framework-PyTorch-blue)]()
 [![License](https://img.shields.io/badge/License-Apache--2.0-orange)](LICENSE)
 
-This repository provides the **official PyTorch implementation** of **TinyUSFM — the first lightweight ultrasound foundation model** designed for efficient and deployable medical AI.
+This repository provides the **official PyTorch implementation** of **[TinyUSFM](https://ieeexplore.ieee.org/document/11457236) — the first lightweight ultrasound foundation model** designed for efficient and deployable medical AI.
 
 TinyUSFM achieves foundation-level representation capability with only **5.5M parameters** and **2.16 GFLOPs**, serves as the **official lightweight continuation** of our last work [Ultrasound Foundation Model(USFM)](https://github.com/openmedlab/USFM), preserving its generalization ability while enabling efficient deployment across diverse ultrasound applications.
 
@@ -104,17 +104,17 @@ See [LICENSE](LICENSE) for details.
 If you find this work useful for your research, please cite:
 
 ```bibtex
-@misc{ma2025tinyusfmcompactefficientultrasound,
-      title={TinyUSFM: Towards Compact and Efficient Ultrasound Foundation Models}, 
-      author={Chen Ma and Jing Jiao and Shuyu Liang and Junhu Fu and Qin Wang and Zeju Li and Yuanyuan Wang and Yi Guo},
-      year={2025},
-      eprint={2510.19239},
-      archivePrefix={arXiv},
-      primaryClass={eess.IV},
-      url={https://arxiv.org/abs/2510.19239}, 
+@article{tinyusfm,
+  author={Ma, Chen and Jiao, Jing and Liang, Shuyu and Fu, Junhu and Wang, Qin and Li, Zeju and Wang, Yuanyuan and Guo, Yi},
+  journal={IEEE Journal of Biomedical and Health Informatics}, 
+  title={TinyUSFM: Towards Compact and Efficient Ultrasound Foundation Models}, 
+  year={2026},
+  pages={1-14},
+  doi={10.1109/JBHI.2026.3678309}
 }
 
-@article{jiao2024usfm,
+
+@article{usfm,
   title={Usfm: A universal ultrasound foundation model generalized to tasks and organs towards label efficient image analysis},
   author={Jiao, Jing and Zhou, Jin and Li, Xiaokang and Xia, Menghua and Huang, Yi and Huang, Lihong and Wang, Na and Zhang, Xiaofan and Zhou, Shichong and Wang, Yuanyuan and others},
   journal={Medical image analysis},
@@ -124,7 +124,7 @@ If you find this work useful for your research, please cite:
   publisher={Elsevier}
 }
 
-@incollection{ma2025unlabeled,
+@incollection{iugc,
   title={Unlabeled Data-Driven Fetal Landmark Detection in Intrapartum Ultrasound},
   author={Ma, Chen and Li, Yunshu and Guo, Bowen and Jiao, Jing and Huang, Yi and Wang, Yuanyuan and Guo, Yi},
   booktitle={Intrapartum Ultrasound Grand Challenge},
