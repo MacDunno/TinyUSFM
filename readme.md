@@ -3,6 +3,13 @@
 [![Framework](https://img.shields.io/badge/Framework-PyTorch-blue)]()
 [![License](https://img.shields.io/badge/License-Apache--2.0-orange)](LICENSE)
 
+---
+
+## 📰 News
+
+- **[MICCAI 2026]** Our paper **ultrasound quality metrics** using TinyUSFM [**Defining Robust Ultrasound Quality Metrics via an Ultrasound Foundation Model (arXiv:2604.19512)**](https://arxiv.org/abs/2604.19512) has been **early accepted(top 9%)**.
+---
+
 This repository provides the **official PyTorch implementation** of **[TinyUSFM](https://ieeexplore.ieee.org/document/11457236) — the first lightweight ultrasound foundation model** designed for efficient and deployable medical AI.
 
 TinyUSFM achieves foundation-level representation capability with only **5.5M parameters** and **2.16 GFLOPs**, serves as the **official lightweight continuation** of our last work [Ultrasound Foundation Model(USFM)](https://github.com/openmedlab/USFM), preserving its generalization ability while enabling efficient deployment across diverse ultrasound applications.
@@ -11,7 +18,6 @@ TinyUSFM achieves foundation-level representation capability with only **5.5M pa
 > 🧩 *We release **UniUS-Bench**, the largest public ultrasound benchmark covering 15 organs.*  
 > ⚙️ *This repository also **fixes and improves** the segmentation settings of [USFM](https://github.com/openmedlab/USFM).*
 > 
----
 
 ## 🧩 Overview
 
